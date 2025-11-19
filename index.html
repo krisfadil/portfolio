@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio — GNANKAMBARY Fadil Kristof</title>
+  <meta name="description" content="Portfolio bilingue (FR/EN) de Fadil Gnankambary — spécialiste SIG & géomarketing. CV, projets, réalisations et contact." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    :root {
+      --maxw: 1100px;
+      --bg: #f5f5f5;
+      --card: #ffffff;
+      --muted: #607d8b;
+      --accent: #1e88e5;
+      --accent-light: #6ab7ff;
+      --border: #e0e0e0;
+      --map-green: #4caf50;
+      --map-blue: #03a9f4;
+      --map-sand: #f1f8e9;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: #102a43;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    .background-blur {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('images/background-blur.jpg') no-repeat center center/cover;
+      filter: blur(10px);
+      z-index: -1;
+    }
+
+    .content-image {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/header-background.jpg') no-repeat center center/cover;
+      color: #fff;
+      padding: 40px 16px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 700;
+      white-space: normal; /* Permet au texte de revenir à la ligne */
+    }
+
+    header .meta {
+      opacity: 0.9;
+      margin-top: 6px;
+      font-size: 15px;
+      white-space: normal; /* Permet au texte de revenir à la ligne */
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px;
+      background: var(--card);
+      border-bottom: 2px solid var(--border);
+    }
+
+    .nav-lang {
+      display: flex;
+      gap: 10px;
+    }
+
+    nav button, nav a.btn-inline {
+      background: var(--map-sand);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      text-decoration: none;
+      color: #102a43;
+    }
+
+    nav button:hover, nav a.btn-inline:hover {
+      background: var(--accent-light);
+      color: #fff;
+      border-color: var(--accent-light);
+    }
+
+    nav button[aria-pressed="true"] {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    nav a.btn-inline[href="#projects"] {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    nav a.btn-inline[href="#projects"]:hover {
+      background: var(--accent-light);
+      color: #fff;
+      border-color: var(--accent-light);
+    }
+
+    .container {
+      max-width: var(--maxw);
+      margin: 30px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      opacity: 0.9; /* Ajoutez cette ligne pour rendre le texte légèrement transparent */
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-size: 18px;
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      opacity: 0.9; /* Ajoutez cette ligne pour rendre le texte légèrement transparent */
+    }
+
+    h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: var(--map-blue);
+      opacity: 0.9; /* Ajoutez cette ligne pour rendre le texte légèrement transparent */
+      font-weight: bold; /* Mettre en gras les titres des diplômes et des certifications */
+    }
+
+    ul {
+      margin-top: 6px;
+      padding-left: 20px;
+      opacity: 0.9; /* Ajoutez cette ligne pour rendre le texte légèrement transparent */
+    }
+
+    p {
+      opacity: 0.9; /* Ajoutez cette ligne pour rendre le texte légèrement transparent */
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 20px;
+    }
+
+    @media(max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    a { color: var(--map-blue); text-decoration: underline; }
+
+    footer {
+      text-align: center;
+      margin: 30px 0 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      width: 100%;
+    }
+
+    .project-card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .project-card img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .project-card h3 {
+      margin: 10px 0;
+      font-size: 18px;
+      color: var(--map-blue);
+    }
+
+    .project-card p {
+      margin: 10px 0;
+      color: var(--muted);
+    }
+
+    .project-card .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .project-card .tag {
+      background: var(--accent-light);
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .project-card .view-project {
+      margin-top: 10px;
+      background: var(--accent);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .project-card .view-project:hover {
+      background: var(--accent-light);
+    }
+
+    .dynamic-text {
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 0;
+      border-right: 0.15em solid #fff;
+      animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #fff }
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 10px;
+      width: 100%;
+    }
+
+    .tool-card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .tool-card i {
+      font-size: 24px;
+      color: var(--accent);
+      margin-bottom: 5px;
+    }
+
+    .tool-card img {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 5px;
+    }
+
+    .tool-card p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="background-blur"></div>
+  <div class="content-image">
+    <header>
+      <div class="brand">
+        <h1 id="dynamic-title" class="dynamic-text"></h1>
+        <div class="meta">Spécialiste Géomarketing & SIG — Ouagadougou, Burkina Faso</div>
+      </div>
+    </header>
+
+    <nav aria-label="Sélecteur de langue">
+      <div>
+        <a class="btn-inline" href="/CV-Fadil-GNANKAMBARY.pdf" target="_blank" rel="noopener" id="cv-link">Télécharger CV</a>
+        <a class="btn-inline" href="https://www.linkedin.com/in/fadil-kristof-gnankambary" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn-inline" href="https://github.com/krisfadil" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn-inline" href="#projects" id="projects-link">Mes projets</a>
+      </div>
+      <div class="nav-lang">
+        <button id="btn-fr" onclick="setLang('fr')">FR</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </nav>
+
+    <main class="container">
+      <div class="grid">
+        <!-- Left column -->
+        <div>
+          <section id="profile" class="card"></section>
+          <section id="skills" class="card"></section>
+          <section id="experience" class="card"></section>
+          <section id="projects" class="card">
+            <h2>Réalisations majeures</h2>
+            <div class="projects-grid">
+              <div class="project-card">
+                <img src="images/project_image1.jpg" alt="OpenJobsAfrica">
+                <h3>OpenJobsAfrica</h3>
+                <p>Dashboard R Shiny pour cartographier le marché de l'emploi en Afrique.</p>
+                <div class="tags">
+                  <span class="tag">R</span>
+                  <span class="tag">Shiny</span>
+                </div>
+                <a href="https://krisfadil.shinyapps.io/emploi_afrique/" class="view-project" target="_blank" rel="noopener">View project</a>
+              </div>
+              <div class="project-card">
+                <img src="images/project_image2.jpg" alt="GSM Cover Builder">
+                <h3>GSM Cover Builder</h3>
+                <p>Plugin QGIS interne pour génération de plans de couverture GSM (GitHub).</p>
+                <div class="tags">
+                  <span class="tag">QGIS</span>
+                <span class="tag">Qt Designer</span>
+                <span class="tag">Python</span>
+                </div>
+                <a href="https://github.com/krisfadil/gsm-cover-builder" class="view-project" target="_blank" rel="noopener">View project</a>
+              </div>
+              <div class="project-card">
+                <img src="images/project_image3.jpg" alt="Géolocalisation des agences bancaires de Ouagadougou">
+                <h3>Géolocalisation des agences bancaires de Ouagadougou</h3>
+                <p>Géolocalisation des agences bancaires de Ouagadougou (ArcGIS Online).</p>
+                <div class="tags">
+                  <span class="tag">ArcGIS</span>
+                  <span class="tag">Online</span>
+                </div>
+                <a href="https://www.arcgis.com/apps/mapviewer/index.html?webmap=7cfa58f5963d4aeba689bbd6e15310d3" class="view-project" target="_blank" rel="noopener">View project</a>
+              </div>
+              <div class="project-card">
+                <img src="images/project_image4.jpg" alt="Carte Covid-19 Burkina Faso">
+                <h3>Carte Covid-19 Burkina Faso</h3>
+                <p>Carte Covid-19 Burkina Faso (Umap, 2019).</p>
+                <div class="tags">
+                  <span class="tag">Umap</span>
+                  <span class="tag">OpenStreetMap</span>
+                </div>
+                <a href="https://umap.openstreetmap.fr/fr/map/burkina-faso-diffusion-du-covid-19_436638#8/12.431/-1.472" class="view-project" target="_blank" rel="noopener">View project</a>
+              </div>
+              <div class="project-card">
+                <img src="images/project_image5.jpg" alt="Carte SODIGAZ">
+                <h3>Carte SODIGAZ</h3>
+                <p>Visualisation du réseau de points de vente.</p>
+                <div class="tags">
+                  <span class="tag">ArcGIS Online</span>
+                  <span class="tag">Kobo Collect</span>
+                </div>
+                <a href="https://www.arcgis.com/apps/instant/interactivelegend/index.html?appid=5f296b1889244779bf99be8195f187d1" class="view-project" target="_blank" rel="noopener">View project</a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Right column -->
+        <aside>
+          <section id="education" class="card"></section>
+          <section id="leadership" class="card"></section>
+          <section id="values" class="card"></section>
+          <section id="references" class="card"></section>
+          <section id="contact" class="card"></section>
+          <section id="tools" class="card">
+            <h2>Boîte à outils</h2>
+            <h3>Outils</h3>
+            <div class="tools-grid">
+              <div class="tool-card">
+                <img src="images/icones/arcgis-pro-glyph-128.svg" alt="ArcGIS">
+                <p>ArcGIS</p>
+              </div>
+              <div class="tool-card">
+                <img src="images/icones/arcgis-online-glyph-128.svg" alt="ArcGIS Online">
+                <p>ArcGIS Online</p>
+              </div>
+              <div class="tool-card">
+                <img src="images/icones/qgis-logosign.svg" alt="QGIS">
+                <p>QGIS</p>
+              </div>
+              <div class="tool-card">
+                <img src="images/icones/Qt_logo_neon_2022.svg" alt="Qt designer">
+                <p>Qt designer</p>
+              </div>
+              <div class="tool-card">
+                <img src="images/icones/logo-kobotoolbox.png" alt="Open Layers">
+                <p>Open Layers</p>
+              </div>
+              <div class="tool-card">
+                <img src="images/icones/power_bi_logo.svg" alt="Open Layers">
+                <p>Open Layers</p>
+              </div>
+              <div class="tool-card">
+                <img src="images/icones/leaflet-logo.svg" alt="Leaflet">
+                <p>Leaflet</p>
+              </div>
+              <div class="tool-card">
+                <img src="images/icones/openlayers_logo.svg" alt="Open Layers">
+                <p>Open Layers</p>
+              </div>
+            </div>
+
+            <h3>Développement</h3>
+            <div class="tools-grid">
+              <div class="tool-card">
+                <i class="fab fa-python"></i>
+                <p>Python</p>
+              </div>
+              <div class="tool-card">
+                <i class="fab fa-r-project"></i>
+                <p>R</p>
+              </div>
+              <div class="tool-card">
+                <i class="fab fa-js"></i>
+                <p>JavaScript</p>
+              </div>
+              <div class="tool-card">
+                <i class="fab fa-html5"></i>
+                <p>HTML5</p>
+              </div>
+              <div class="tool-card">
+                <i class="fab fa-css3-alt"></i>
+                <p>CSS3</p>
+              </div>
+              <div class="tool-card">
+                <i class="fab fa-php"></i>
+                <p>PHP</p>
+              </div>
+              <div class="tool-card">
+                <i class="fab fa-java"></i>
+                <p>Java</p>
+              </div>
+              <div class="tool-card">
+                <i class="fab fa-git-alt"></i>
+                <p>Git</p>
+              </div>
+              <div class="tool-card">
+                <i class="fab fa-github"></i>
+                <p>GitHub</p>
+              </div>
+              <div class="tool-card">
+                <i class="fab fa-wordpress"></i>
+                <p>WordPress</p>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      © <span id="year"></span> GNANKAMBARY Fadil Kristof — Portfolio bilingue (FR / EN)
+    </footer>
+  </div>
+
+  <script>
+    // Content object with French and English content for each section
+    const content = {
+      fr: {
+        title: 'Bonjour, je suis Fadil Kristof GNANKAMBARY',
+        meta: 'Spécialiste Géomarketing & SIG — Ouagadougou, Burkina Faso',
+        profile: `<h2>Profil professionnel</h2>
+          <p>Professionnel des systèmes d’information géographique (SIG) et du géomarketing, avec une solide expérience en analyse spatiale, pilotage de projets data-driven et développement d’outils d’aide à la décision. J’allie rigueur analytique, esprit de synthèse et sens opérationnel pour transformer la donnée géographique en valeur stratégique.</p>`,
+        skills: `<h2>Compétences clés</h2>
+          <ul>
+            <li><strong>SIG & Cartographie :</strong> QGIS, ArcGIS, PostGIS, Global Mapper, MAPublisher</li>
+            <li><strong>Géomarketing & Analyse :</strong> études de potentiel FTTx/GSM, modèles de zones de chalandise</li>
+            <li><strong>Data & Visualisation :</strong> Power BI, R, R Shiny, Streamlit, Excel avancé</li>
+            <li><strong>Développement & BD :</strong> Python, ArcPy, PyQGIS, SQL, PostgreSQL, MySQL</li>
+            <li><strong>Webmapping & Outils :</strong> Leaflet, GeoServer, ArcGIS Online</li>
+            <li><strong>Collecte :</strong> KoboToolbox, ODK, GPS</li>
+            <li><strong>Télédétection & Photogrammétrie :</strong> ERDAS, ENVI, Metashape, Pix4D</li>
+            <li><strong>Langues :</strong> Français (natif), Anglais (professionnel)</li>
+          </ul>`,
+        experience: `<h2>Expérience professionnelle</h2>
+          <h3>Orange Burkina Faso — Chargé du géomarketing et de la géomatique (Jan. 2021 – Présent)</h3>
+          <ul>
+            <li>Pilotage de collectes géoréférencées à grande échelle (jusqu'à 700 000 bâtiments) pour l’analyse du potentiel FTTx, FWA et GSM.</li>
+            <li>Études et cartographie du potentiel réseau, veille concurrentielle et support décisionnel opérationnel.</li>
+            <li>Conception d’outils de reporting (Power BI, R Shiny, Streamlit) et cartes interactives (Leaflet).</li>
+            <li>Appui géomarketing aux filiales Orange Money et Orange Énergie.</li>
+          </ul>
+
+          <h3>SODIGAZ APC — Analyste Géomarketing (Nov. 2020 – Déc. 2020)</h3>
+          <ul>
+            <li>Mise en place d’une infrastructure de bases de données spatiales et production de cartes intelligentes pour l’optimisation du réseau de distribution.</li>
+            <li>Supervision de la collecte terrain (KoboToolbox) et analyse des données opérationnelles.</li>
+          </ul>
+
+          <h3>Institut Géographique du Burkina (IGB) — Technicien Supérieur (Déc. 2018 – Oct. 2020)</h3>
+          <ul>
+            <li>Production des BDOT 1992, 2002 et 2014 (PIF) : classifications Landsat, vérifications terrain et cartographie des changements.</li>
+            <li>Contrôle qualité et participation à la validation nationale des cartes d’occupation du sol.</li>
+          </ul>
+
+          <h3>Stages (2014–2018)</h3>
+          <ul>
+            <li>INERA — SIG et gestion foncière de bas-fonds.</li>
+            <li>Geomatics Innovations (Ghana) — Bases de données & développement web.</li>
+            <li>Geodetect — site web, bases clients, réseaux sociaux.</li>
+            <li>Burval Corporate — géolocalisation et maintenance.</li>
+            <li>Gryphon Minerals — relevés GPS et cartographie minière.</li>
+          </ul>`,
+        projects: `<h2>Réalisations majeures</h2>
+          <div class="projects-grid">
+            <div class="project-card">
+              <img src="images/project_image1.jpg" alt="OpenJobsAfrica">
+              <h3>OpenJobsAfrica</h3>
+              <p>Dashboard R Shiny pour cartographier le marché de l'emploi en Afrique.</p>
+              <div class="tags">
+                <span class="tag">R</span>
+                <span class="tag">Shiny</span>
+              </div>
+              <a href="https://krisfadil.shinyapps.io/emploi_afrique/" class="view-project" target="_blank" rel="noopener">View project</a>
+            </div>
+            <div class="project-card">
+              <img src="images/project_image2.jpg" alt="GSM Cover Builder">
+              <h3>GSM Cover Builder</h3>
+              <p>Plugin QGIS pour génération de plans de couverture GSM (GitHub).</p>
+              <div class="tags">
+                <span class="tag">QGIS</span>
+                <span class="tag">Qt Designer</span>
+                <span class="tag">Python</span>
+              </div>
+              <a href="https://github.com/krisfadil/gsm-cover-builder" class="view-project" target="_blank" rel="noopener">View project</a>
+            </div>
+            <div class="project-card">
+              <img src="images/project_image3.jpg" alt="Géolocalisation des agences bancaires de Ouagadougou">
+              <h3>Géolocalisation des agences bancaires de Ouagadougou</h3>
+              <p>Géolocalisation des agences bancaires de Ouagadougou.</p>
+              <div class="tags">
+                <span class="tag">ArcGIS Online</span>
+                <span class="tag">Google maps</span>
+              </div>
+              <a href="https://www.arcgis.com/apps/mapviewer/index.html?webmap=7cfa58f5963d4aeba689bbd6e15310d3" class="view-project" target="_blank" rel="noopener">View project</a>
+            </div>
+            <div class="project-card">
+              <img src="images/project_image4.jpg" alt="Carte Covid-19 Burkina Faso">
+              <h3>Carte Covid-19 Burkina Faso</h3>
+              <p>Carte Covid-19 Burkina Faso (Umap, 2019).</p>
+              <div class="tags">
+                <span class="tag">Umap</span>
+                <span class="tag">OpenStreetMap</span>
+              </div>
+              <a href="https://umap.openstreetmap.fr/fr/map/burkina-faso-diffusion-du-covid-19_436638#8/12.431/-1.472" class="view-project" target="_blank" rel="noopener">View project</a>
+            </div>
+            <div class="project-card">
+              <img src="images/project_image5.jpg" alt="Carte SODIGAZ">
+              <h3>Carte SODIGAZ</h3>
+              <p>Visualisation du réseau de points de vente.</p>
+              <div class="tags">
+                <span class="tag">ArcGIS Online</span>
+                <span class="tag">Kobo Collect</span>
+              </div>
+              <a href="https://www.arcgis.com/apps/instant/interactivelegend/index.html?appid=5f296b1889244779bf99be8195f187d1" class="view-project" target="_blank" rel="noopener">View project</a>
+            </div>
+          </div>`,
+        education: `<h2>Éducation & Certifications</h2>
+          <h3>Diplômes</h3>
+          <ul>
+            <li><strong>Master en Gestion de Projet</strong> — CERPAMAD (en cours)</li>
+            <li><strong>Master en Télédétection & SIG</strong> — IPD-AOS (2020)</li>
+            <li><strong>Licence en Géomatique</strong> — SIGET-A (2016)</li>
+            <li><strong>Baccalauréat série D</strong> — 2013</li>
+          </ul>
+          <h3>Certifications</h3>
+          <ul>
+            <li><strong>Open Science pour le Développement</strong> — UV/Open Burkina (2025)</li>
+            <li><strong>École d'été en science sociale computationnelle</strong> — ISSP (2025)</li>
+            <li><strong>Power BI & dashboards</strong> — Orange (2024)</li>
+            <li><strong>GIS for Telecoms Geomarketing</strong> — Tenolli / Orange (2024)</li>
+            <li><strong>Introduction à la statistique avec R</strong> — Université Paris-Saclay (2023)</li>
+            <li><strong>Initiation à Leaflet</strong> — Orange Digital Center Burkina Faso (2022)</li>
+            <li><strong>Autorisation d’enseigner au premier cycle universitaire</strong> — MESRI (2022)</li>
+            <li><strong>Photogrammétrie (Metashape)</strong> — IGB (2020)</li>
+            <li><strong>Cartographie avec MAPublisher d’Adobe Illustrator</strong> — IGB (2020)</li>
+            <li><strong>TOEFL iBT</strong> — Educational Testing Service (ETS) (2020)</li>
+          </ul>`,
+        leadership: `<h2>Leadership & engagements</h2>
+          <ul>
+            <li><strong>Consultant formateur en géomarketing</strong> — IPD-AOS (depuis 2022)</li>
+            <li><strong>Membre du secrétariat exécutif</strong> — AProGI-BF (depuis 2021)</li>
+          </ul>`,
+        values: `<h2>Culture & Valeurs professionnelles</h2>
+          <p>Rigueur, intégrité, respect des délais et sens du travail bien fait. Passion pour le partage des connaissances et l'impact des données géospatiales sur le développement.</p>`,
+        references: `<h2>Personnes ressources</h2>
+          <ul>
+            <li>André OUEDRAOGO — Orange Middle East & Africa</li>
+            <li>Frédéric PONS — Intersocial Consulting</li>
+            <li>Armel SANOU — Geodetect Burkina</li>
+            <li>Abdoulaye NAKOULMA — Institut Géographique du Burkina (IGB)</li>
+          </ul>`,
+        contact: `<h2>Contact</h2>
+          <p><i class="fa-solid fa-envelope"></i> <a href="mailto:krisfadil@live.fr">krisfadil@live.fr</a></p>
+          <p> <i class="fa-solid fa-phone"></i> (+226) 76 42 56 16</p>
+          <p> <i class="fab fa-whatsapp"></i> (+226) 70 64 52 52</p>`,
+        toolsTitle: 'Boîte à outils',
+        toolsSubtitle1: 'Outils',
+        toolsSubtitle2: 'Développement'
+      },
+
+      en: {
+        title: 'Hi, I am Fadil Kristof GNANKAMBARY',
+        meta: 'Geomarketing & SIG Specialist — Ouagadougou, Burkina Faso',
+        profile: `<h2>Professional Profile</h2>
+          <p>GIS and geomarketing specialist with solid experience in spatial analysis, data-driven project management and the development of decision-support tools. I combine analytical rigor, synthesis skills and operational focus to turn geospatial data into strategic value.</p>`,
+        skills: `<h2>Key Skills</h2>
+          <ul>
+            <li><strong>GIS & Mapping:</strong> QGIS, ArcGIS, PostGIS, Global Mapper, MAPublisher</li>
+            <li><strong>Geomarketing & Analysis:</strong> FTTx/GSM potential studies, catchment area modelling</li>
+            <li><strong>Data & Visualization:</strong> Power BI, R, R Shiny, Streamlit, Advanced Excel</li>
+            <li><strong>Development & DB:</strong> Python, ArcPy, PyQGIS, SQL, PostgreSQL, MySQL</li>
+            <li><strong>Webmapping & Tools:</strong> Leaflet, GeoServer, ArcGIS Online</li>
+            <li><strong>Data collection:</strong> KoboToolbox, ODK, GPS</li>
+            <li><strong>Remote sensing & Photogrammetry:</strong> ERDAS, ENVI, Metashape, Pix4D</li>
+            <li><strong>Languages:</strong> French (native), English (professional)</li>
+          </ul>`,
+        experience: `<h2>Professional Experience</h2>
+          <h3>Orange Burkina Faso — Geomarketing & GIS Specialist (Jan. 2021 – Present)</h3>
+          <ul>
+            <li>Managed large-scale georeferenced data collection (up to 700,000 buildings) for FTTx, FWA and GSM potential analysis.</li>
+            <li>Delivered network potential studies, competitive mapping and operational decision support.</li>
+            <li>Designed interactive reporting tools (Power BI, R Shiny, Streamlit) and web maps (Leaflet).</li>
+            <li>Provided geomarketing support to Orange Money and Orange Energy teams.</li>
+          </ul>
+
+          <h3>SODIGAZ APC — Geomarketing Analyst (Nov. 2020 – Dec. 2020)</h3>
+          <ul>
+            <li>Implemented spatial database infrastructure and produced smart maps to optimize distribution network.</li>
+            <li>Supervised field data collection using KoboToolbox and analysed operational datasets.</li>
+          </ul>
+
+          <h3>Institut Géographique du Burkina (IGB) — Senior GIS Technician (Dec. 2018 – Oct. 2020)</h3>
+          <ul>
+            <li>Produced land occupation databases (BDOT 1992, 2002, 2014): Landsat classifications, field checks and change mapping.</li>
+            <li>Quality control and participation in national map validation processes.</li>
+          </ul>
+
+          <h3>Internships (2014–2018)</h3>
+          <ul>
+            <li>INERA — GIS and land management in lowland areas.</li>
+            <li>Geomatics Innovations (Ghana) — databases & web development.</li>
+            <li>Geodetect — website, client databases, social media.</li>
+            <li>Burval Corporate — geolocation and maintenance.</li>
+            <li>Gryphon Minerals — GPS surveys and mining mapping.</li>
+          </ul>`,
+        projects: `<h2>Key Projects</h2>
+          <div class="projects-grid">
+            <div class="project-card">
+              <img src="images/project_image1.jpg" alt="OpenJobsAfrica">
+              <h3>OpenJobsAfrica</h3>
+              <p>R Shiny dashboard mapping the African job market.</p>
+              <div class="tags">
+                <span class="tag">R</span>
+                <span class="tag">Shiny</span>
+              </div>
+              <a href="https://krisfadil.shinyapps.io/emploi_afrique/" class="view-project" target="_blank" rel="noopener">View project</a>
+            </div>
+            <div class="project-card">
+              <img src="images/project_image2.jpg" alt="GSM Cover Builder">
+              <h3>GSM Cover Builder</h3>
+              <p>Tool for coverage planning designed in QGIS and implemented with Python.</p>
+              <div class="tags">
+                <span class="tag">QGIS</span>
+                <span class="tag">Qt Designer</span>
+                <span class="tag">Python</span>
+              </div>
+              <a href="https://github.com/krisfadil/gsm-cover-builder" class="view-project" target="_blank" rel="noopener">View project</a>
+            </div>
+            <div class="project-card">
+              <img src="images/project_image3.jpg" alt="Bank branches mapping — Ouagadougou">
+              <h3>Bank branches mapping</h3>
+              <p>Spatial mapping of bank branches in Ouagadougou using ArcGIS Online.</p>
+              <div class="tags">
+                <span class="tag">ArcGIS</span>
+                <span class="tag">Online</span>
+              </div>
+              <a href="https://www.arcgis.com/apps/mapviewer/index.html?webmap=7cfa58f5963d4aeba689bbd6e15310d3" class="view-project" target="_blank" rel="noopener">View project</a>
+            </div>
+            <div class="project-card">
+              <img src="images/project_image4.jpg" alt="Covid-19 Burkina Faso map">
+              <h3>Covid-19 Burkina Faso map</h3>
+              <p>Covid-19 Burkina Faso map — Umap (2019).</p>
+              <div class="tags">
+                <span class="tag">Umap</span>
+                <span class="tag">OpenStreetMap</span>
+              </div>
+              <a href="https://umap.openstreetmap.fr/fr/map/burkina-faso-diffusion-du-covid-19_436638#8/12.431/-1.472" class="view-project" target="_blank" rel="noopener">View project</a>
+            </div>
+            <div class="project-card">
+              <img src="images/project_image5.jpg" alt="SODIGAZ network map">
+              <h3>SODIGAZ network map</h3>
+              <p>Distribution network visualization.</p>
+              <div class="tags">
+                <span class="tag">ArcGIS Online</span>
+                <span class="tag">Kobo Collect</span>
+              </div>
+              <a href="https://www.arcgis.com/apps/instant/interactivelegend/index.html?appid=5f296b1889244779bf99be8195f187d1" class="view-project" target="_blank" rel="noopener">View project</a>
+            </div>
+          </div>`,
+        education: `<h2>Education & Certifications</h2>
+          <h3>Qualifications</h3>
+          <ul>
+            <li><strong>Master in Project Management</strong> — CERPAMAD (ongoing)</li>
+            <li><strong>Master in Remote Sensing & GIS</strong> — IPD-AOS (2020)</li>
+            <li><strong>BSc in Geomatics</strong> — SIGET-A (2016)</li>
+            <li><strong>High school diploma</strong> — 2013</li>
+          </ul>
+          <h3>Certifications</h3>
+          <ul>
+            <li><strong>Open Science for Development</strong> — UV/Open Burkina (2025)</li>
+            <li><strong>Summer school in Computational Social Science</strong> — ISSP (2025)</li>
+            <li><strong>Power BI & dashboards</strong> — Orange (2024)</li>
+            <li><strong>GIS training for Telecoms Geomarketing</strong> — Tenolli/Orange (2024)</li>
+            <li><strong>Introduction to Statistics with R</strong> — Université Paris-Saclay (2023)</li>
+            <li><strong>Introduction to Leaflet</strong> — Orange Digital Center Burkina Faso (2022)</li>
+            <li><strong>Authorization to teach at the first cycle university</strong> — MESRI (2022)</li>
+            <li><strong>Photogrammetry (Metashape)</strong> — IGB (2020)</li>
+            <li><strong>Cartography with MAPublisher of Adobe Illustrator</strong> — IGB (2020)</li>
+            <li><strong>TOEFL iBT</strong> — Educational Testing Service (ETS) (2020)</li>
+          </ul>`,
+        leadership: `<h2>Leadership & Activities</h2>
+          <ul>
+            <li><strong>Geomarketing instructor</strong> — IPD-AOS (since 2022)</li>
+            <li><strong>Executive Secretariat member</strong> — AProGI-BF (since 2021)</li>
+          </ul>`,
+        values: `<h2>Culture & Values</h2>
+          <p>Rigor, integrity, respect of deadlines and a strong commitment to high-quality deliverables. Passionate about knowledge sharing and the societal impact of geospatial data.</p>`,
+        references: `<h2>References</h2>
+          <ul>
+            <li>André OUEDRAOGO — Orange Middle East & Africa</li>
+            <li>Frédéric PONS — Intersocial Consulting</li>
+            <li>Armel SANOU — Geodetect Burkina</li>
+            <li>Abdoulaye NAKOULMA — Institut Géographique du Burkina (IGB)</li>
+          </ul>`,
+        contact: `<h2>Contact</h2>
+          <p><i class="fa-solid fa-envelope"></i> <a href="mailto:krisfadil@live.fr">krisfadil@live.fr</a></p>
+          <p> <i class="fa-solid fa-phone"></i> (+226) 76 42 56 16</p>
+          <p> <i class="fab fa-whatsapp"></i> (+226) 70 64 52 52</p>`,
+        toolsTitle: 'Toolbox',
+        toolsSubtitle1: 'Tools',
+        toolsSubtitle2: 'Development'
+      }
+    };
+
+    // setLang function updates the DOM with the selected language
+    function setLang(lang) {
+      const langContent = content[lang] || content.fr;
+      // Update document title and header
+      document.getElementById('dynamic-title').textContent = langContent.title;
+      document.querySelector('.meta').textContent = langContent.meta;
+      // Populate sections
+      document.getElementById('profile').innerHTML = langContent.profile;
+      document.getElementById('skills').innerHTML = langContent.skills;
+      document.getElementById('experience').innerHTML = langContent.experience;
+      document.getElementById('projects').innerHTML = langContent.projects;
+      document.getElementById('education').innerHTML = langContent.education;
+      document.getElementById('leadership').innerHTML = langContent.leadership;
+      document.getElementById('values').innerHTML = langContent.values;
+      document.getElementById('references').innerHTML = langContent.references;
+      document.getElementById('contact').innerHTML = langContent.contact;
+
+      // Update tools section titles
+      document.querySelector('#tools h2').textContent = langContent.toolsTitle;
+      document.querySelector('#tools h3:nth-of-type(1)').textContent = langContent.toolsSubtitle1;
+      document.querySelector('#tools h3:nth-of-type(2)').textContent = langContent.toolsSubtitle2;
+
+      // Update language button styles (accessible toggle)
+      document.getElementById('btn-fr').setAttribute('aria-pressed', lang === 'fr');
+      document.getElementById('btn-en').setAttribute('aria-pressed', lang === 'en');
+
+      // Update year in footer
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Update CV link based on language
+      const cvLink = document.getElementById('cv-link');
+      if (lang === 'fr') {
+        cvLink.href = 'files/CV-Fadil-GNANKAMBARY-FR.pdf';
+        cvLink.textContent = 'Télécharger CV';
+      } else {
+        cvLink.href = 'files/CV-Fadil-GNANKAMBARY-EN.pdf';
+        cvLink.textContent = 'Download CV';
+      }
+
+      // Update projects link based on language
+      const projectsLink = document.getElementById('projects-link');
+      if (lang === 'fr') {
+        projectsLink.textContent = 'Mes projets';
+      } else {
+        projectsLink.textContent = 'My projects';
+      }
+    }
+
+    // Initialize default language
+    setLang('fr');
+
+    // Smooth scroll to projects section
+    document.getElementById('projects-link').addEventListener('click', function(event) {
+      event.preventDefault();
+      const projectsSection = document.getElementById('projects');
+      projectsSection.scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
