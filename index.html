@@ -62,6 +62,7 @@
       font-size: 26px;
       font-weight: 700;
       white-space: normal; /* Permet au texte de revenir à la ligne */
+      word-wrap: break-word; /* Permet au texte de revenir à la ligne */
     }
 
     header .meta {
@@ -74,6 +75,7 @@
     nav {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       gap: 10px;
       padding: 14px;
       background: var(--card);
@@ -81,11 +83,15 @@
     }
 
     .nav-lang {
+      position: fixed;
+      top: 20px;
+      right: 20px;
       display: flex;
       gap: 10px;
+      z-index: 1000; /* Assurez-vous qu'ils restent au-dessus des autres éléments */
     }
 
-    nav button, nav a.btn-inline {
+    .nav-lang a {
       background: var(--map-sand);
       border: 1px solid var(--border);
       padding: 8px 14px;
@@ -97,28 +103,86 @@
       color: #102a43;
     }
 
-    nav button:hover, nav a.btn-inline:hover {
+    .nav-lang a:hover {
       background: var(--accent-light);
       color: #fff;
       border-color: var(--accent-light);
     }
 
-    nav button[aria-pressed="true"] {
+    .nav-lang a[href="#projects"] {
       background: var(--accent);
       color: #fff;
       border-color: var(--accent);
     }
 
-    nav a.btn-inline[href="#projects"] {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
-
-    nav a.btn-inline[href="#projects"]:hover {
+    .nav-lang a[href="#projects"]:hover {
       background: var(--accent-light);
       color: #fff;
       border-color: var(--accent-light);
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-menu a {
+      background: var(--map-sand);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      text-decoration: none;
+      color: #102a43;
+    }
+
+    .nav-menu a:hover {
+      background: var(--accent-light);
+      color: #fff;
+      border-color: var(--accent-light);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #102a43;
+      margin: 4px;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .nav-menu.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-lang {
+        margin-top: 10px;
+        justify-content: flex-end;
+        width: 100%;
+      }
     }
 
     .container {
@@ -317,6 +381,17 @@
       font-size: 12px;
       color: var(--muted);
     }
+	
+	#projects-link {
+	color: #007bff;
+	text-decoration: non;
+	}
+	
+	#projects-link:hover {
+	color: #ffffff;        /* devient blanc */
+	text-decoration: underline;
+	}
+
   </style>
 </head>
 <body>
@@ -329,18 +404,23 @@
       </div>
     </header>
 
-    <nav aria-label="Sélecteur de langue">
-      <div>
+    <nav aria-label="Menu">
+      <div class="hamburger" id="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="nav-menu" id="nav-menu">
         <a class="btn-inline" href="/CV-Fadil-GNANKAMBARY.pdf" target="_blank" rel="noopener" id="cv-link">Télécharger CV</a>
         <a class="btn-inline" href="https://www.linkedin.com/in/fadil-kristof-gnankambary" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn-inline" href="https://github.com/krisfadil" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn-inline" href="#projects" id="projects-link">Mes projets</a>
-      </div>
-      <div class="nav-lang">
-        <button id="btn-fr" onclick="setLang('fr')">FR</button>
-        <button id="btn-en" onclick="setLang('en')">EN</button>
+		<a class="btn-inline" href="#projects" id="projects-link">Mes projets</a>
       </div>
     </nav>
+    <div class="nav-lang">
+      <button id="btn-fr" onclick="setLang('fr')">FR</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
 
     <main class="container">
       <div class="grid">
@@ -365,11 +445,11 @@
               <div class="project-card">
                 <img src="images/project_image2.jpg" alt="GSM Cover Builder">
                 <h3>GSM Cover Builder</h3>
-                <p>Plugin QGIS interne pour génération de plans de couverture GSM (GitHub).</p>
+                <p>Plugin QGIS pour génération de plans de couverture GSM (GitHub).</p>
                 <div class="tags">
                   <span class="tag">QGIS</span>
-                <span class="tag">Qt Designer</span>
-                <span class="tag">Python</span>
+                  <span class="tag">Qt Designer</span>
+                  <span class="tag">Python</span>
                 </div>
                 <a href="https://github.com/krisfadil/gsm-cover-builder" class="view-project" target="_blank" rel="noopener">View project</a>
               </div>
@@ -579,10 +659,10 @@
             <div class="project-card">
               <img src="images/project_image3.jpg" alt="Géolocalisation des agences bancaires de Ouagadougou">
               <h3>Géolocalisation des agences bancaires de Ouagadougou</h3>
-              <p>Géolocalisation des agences bancaires de Ouagadougou.</p>
+              <p>Géolocalisation des agences bancaires de Ouagadougou (ArcGIS Online).</p>
               <div class="tags">
-                <span class="tag">ArcGIS Online</span>
-                <span class="tag">Google maps</span>
+                <span class="tag">ArcGIS</span>
+                <span class="tag">Online</span>
               </div>
               <a href="https://www.arcgis.com/apps/mapviewer/index.html?webmap=7cfa58f5963d4aeba689bbd6e15310d3" class="view-project" target="_blank" rel="noopener">View project</a>
             </div>
@@ -851,6 +931,20 @@
       event.preventDefault();
       const projectsSection = document.getElementById('projects');
       projectsSection.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Toggle hamburger menu
+    document.getElementById('hamburger').addEventListener('click', function() {
+      const navMenu = document.getElementById('nav-menu');
+      navMenu.classList.toggle('active');
+    });
+
+    // Close hamburger menu when a link is clicked
+    document.querySelectorAll('.nav-menu a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        const navMenu = document.getElementById('nav-menu');
+        navMenu.classList.remove('active');
+      });
     });
   </script>
 </body>
