@@ -381,16 +381,18 @@
       font-size: 12px;
       color: var(--muted);
     }
-	
-	#projects-link {
-	color: #007bff;
-	text-decoration: non;
-	}
-	
-	#projects-link:hover {
-	color: #ffffff;        /* devient blanc */
-	text-decoration: underline;
-	}
+
+    nav a.btn-inline[href="#projects"] {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    nav a.btn-inline[href="#projects"]:hover {
+      background: var(--accent-light);
+      color: #fff;
+      border-color: var(--accent-light);
+    }
 
   </style>
 </head>
