@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title data-i18n="meta.title"></title>
+  <meta name="description" data-i18n="meta.description" />
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pbV+XK6fQYbqH6h6JYfV9Yj0/3Z+VYVx4Y9zqZz1P5r1u2qJY9Qh1z2q3x4Y5z6/7s8t9u0v==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+  <style>
+    :root{
+      --primary-color:#2563eb;
+      --secondary-color:#1e40af;
+      --text-color:#1f2937;
+      --light-text:#6b7280;
+      --background:#ffffff;
+      --section-bg:#f3f4f6;
+      --accent:#26a69a;
+      --maxw:1100px;
+      --nav-height:70px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial; margin:0;background:var(--background);color:var(--text-color);-webkit-font-smoothing:antialiased}
+
+    /* NAVBAR */
+    .navbar{position:fixed;top:0;left:0;right:0;height:var(--nav-height);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 20px;z-index:1000;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(15,23,42,0.04)}
+    .nav-left{display:flex;align-items:center;gap:12px}
+    .logo{font-weight:700;color:var(--primary-color);font-size:18px}
+    .nav-center{display:flex;gap:18px;justify-content:center}
+    .nav-link{color:var(--text-color);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:500}
+    .nav-link:hover{background:rgba(37,99,235,0.08)}
+    .nav-right{display:flex;justify-content:flex-end;gap:8px}
+    .lang-btn{padding:8px 10px;border-radius:8px;border:1px solid transparent;background:transparent;cursor:pointer}
+    .lang-btn.active{border-color:var(--primary-color);background:rgba(37,99,235,0.08)}
+    @media(max-width:900px){.nav-center{display:none}.navbar{grid-template-columns:1fr auto}}
+
+    main{padding-top:calc(var(--nav-height) + 20px)}
+
+    /* HERO */
+    .hero{min-height:calc(100vh - var(--nav-height));display:flex;align-items:center;justify-content:center;position:relative;padding:40px;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);overflow:hidden}
+    .hero-inner{max-width:var(--maxw);width:100%;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;padding:40px}
+    @media(max-width:900px){.hero-inner{grid-template-columns:1fr;padding:20px}}
+    .hero-text h1{font-size:clamp(28px,4vw,44px);margin:0 0 12px}
+    .hero-text p{margin:0 0 16px;color:var(--light-text)}
+    .hero-ctas{display:flex;gap:12px}
+    .btn-primary{background:var(--primary-color);color:#fff;padding:12px 16px;border-radius:10px;border:0;cursor:pointer}
+    .btn-ghost{background:transparent;border:1px solid rgba(15,23,42,0.08);padding:12px 16px;border-radius:10px;cursor:pointer}
+
+    /* Floating tech icons */
+    .float-icon{position:absolute;opacity:0;animation:floatAnim linear infinite}
+    @keyframes floatAnim{0%{transform:translateY(0) rotate(0deg);opacity:0}10%{opacity:1}50%{transform:translateY(-20px) rotate(200deg)}90%{opacity:0}100%{opacity:0}}
+
+    /* ABOUT */
+    .section{padding:60px 20px;background:var(--section-bg)}
+    .container{max-width:var(--maxw);margin:0 auto}
+    .about{display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:center}
+    @media(max-width:900px){.about{grid-template-columns:1fr}}
+    .avatar{width:300px;height:300px;border-radius:50%;overflow:hidden;border:4px solid var(--primary-color);box-shadow:0 8px 30px rgba(2,6,23,0.08)}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .avatar:hover{transform:translateY(-6px);transition:transform .25s}
+    .about p{color:var(--light-text)}
+
+    /* TIMELINE */
+    .timeline{position:relative;padding:40px 0}
+    .timeline::before{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:4px;height:100%;background:linear-gradient(180deg,var(--primary-color),var(--secondary-color));border-radius:4px}
+    .timeline-item{position:relative;width:50%;padding:20px 30px}
+    .timeline-item.left{left:0;text-align:right}
+    .timeline-item.right{left:50%}
+    .timeline-item .card{display:inline-block;text-align:left}
+    .timeline-dot{position:absolute;left:50%;transform:translateX(-50%);width:18px;height:18px;border-radius:50%;background:var(--primary-color);border:4px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,0.12)}
+    @media(max-width:900px){.timeline::before{left:20px;transform:none}.timeline-item{width:100%;padding-left:50px;padding-right:20px}.timeline-item.left,.timeline-item.right{left:0;text-align:left}.timeline-dot{left:28px}}
+
+    /* PROJECTS */
+    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    @media(max-width:1100px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:700px){.projects-grid{grid-template-columns:1fr}}
+    .project-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(2,6,23,0.06);transition:transform .25s,box-shadow .25s}
+    .project-card:hover{transform:translateY(-10px);box-shadow:0 18px 50px rgba(2,6,23,0.12)}
+    .project-media{position:relative;height:0;padding-bottom:56.25%;overflow:hidden}
+    .project-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+    .project-card:hover .project-media img{transform:scale(1.06)}
+    .project-body{padding:16px}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .tag{padding:6px 10px;border-radius:999px;background:rgba(15,23,42,0.05);font-size:13px}
+    .project-cta{display:inline-flex;align-items:center;gap:8px;margin-top:12px;color:var(--primary-color);text-decoration:none}
+
+    /* STACK */
+    .stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media(max-width:900px){.stack-grid{grid-template-columns:repeat(2,1fr)}}
+    .stack-item{background:#fff;border-radius:10px;padding:18px;text-align:center;box-shadow:0 6px 18px rgba(2,6,23,0.06);transition:transform .2s}
+    .stack-item:hover{transform:translateY(-6px)}
+
+    /* CONTACT */
+    .contact-center{text-align:center}
+    .contact-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+    .contact-btn{padding:12px 18px;border-radius:10px;border:0;cursor:pointer}
+    .btn-email{background:var(--primary-color);color:#fff}
+    .btn-linkedin{background:transparent;border:1px solid rgba(15,23,42,0.08)}
+
+    /* FOOTER */
+    footer{padding:28px 16px;text-align:center;color:var(--light-text);background:transparent}
+
+    /* Animations & reveal */
+    .fade-up{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
+    .fade-up.in-view{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo" data-i18n="brand">FG — Géomarketing</div>
+    </div>
+
+    <div class="nav-center">
+      <a class="nav-link" href="#hero" data-i18n="nav.home">Accueil</a>
+      <a class="nav-link" href="#about" data-i18n="nav.about">À propos</a>
+      <a class="nav-link" href="#experience" data-i18n="nav.experience">Expérience</a>
+      <a class="nav-link" href="#projects" data-i18n="nav.projects">Projets</a>
+      <a class="nav-link" href="#contact" data-i18n="nav.contact">Contact</a>
+    </div>
+
+    <div class="nav-right">
+      <button id="btn-fr" class="lang-btn" aria-pressed="false">FR</button>
+      <button id="btn-en" class="lang-btn" aria-pressed="false">EN</button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero" aria-label="Hero section">
+      <div class="hero-inner container">
+        <div class="hero-text">
+          <h1 id="hero-greeting" data-i18n="hero.greeting"></h1>
+          <p id="hero-title" data-i18n="hero.title"></p>
+          <p class="meta" id="hero-location" data-i18n="hero.location"></p>
+          <div class="hero-ctas">
+            <a id="cta-contact" class="btn-primary" href="#contact" data-i18n="hero.ctaContact"></a>
+            <a id="cta-work" class="btn-ghost" href="#projects" data-i18n="hero.ctaWork"></a>
+          </div>
+        </div>
+
+        <div class="hero-side" aria-hidden>
+          <!-- Floating icons container -->
+          <div id="floating-icons" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container about">
+        <div class="avatar card">
+          <!--<img src="https://img.freepik.com/vecteurs-libre/illustration-du-jeune-homme-aux-lunettes_1308-174706.jpg" alt="Photo" />-->
+		  <img src="images/profile.jpg" alt="Photo" />
+			
+		</div>
+        <div class="card about-content">
+          <h2 data-i18n="about.title"></h2>
+          <p id="about-p1" data-i18n="about.p1"></p>
+          <p id="about-p2" data-i18n="about.p2"></p>
+          <div style="margin-top:12px">
+            <a id="link-linkedin" class="nav-link" href="#" target="_blank">LinkedIn</a>
+            <a id="link-email" class="nav-link" href="mailto:krisfadil@live.fr">Email</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE / TIMELINE -->
+    <section id="experience" class="section">
+      <div class="container">
+        <h2 data-i18n="experience.title"></h2>
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 data-i18n="projects.title"></h2>
+        <div class="projects-grid" id="projects-grid"></div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" class="section">
+      <div class="container">
+        <h2 data-i18n="stack.title"></h2>
+        <div class="stack-grid" id="stack-grid"></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container contact-center card">
+        <h2 data-i18n="contact.title"></h2>
+        <p id="contact-p1" data-i18n="contact.p1"></p>
+        <div class="contact-buttons">
+          <a id="email-btn" class="contact-btn btn-email" href="mailto:krisfadil@live.fr"><i class="fa fa-envelope"></i> <span data-i18n="contact.email"></span></a>
+          <a id="linkedin-btn" class="contact-btn btn-linkedin" href="https://www.linkedin.com/in/fadil-kristof-gnankambary" target="_blank"><i class="fa fa-linkedin"></i> <span data-i18n="contact.linkedin"></span></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container"><small>© <span id="year"></span> GNANKAMBARY Fadil Kristof</small></div>
+  </footer>
+
+  <script>
+    /* =====================
+       TRANSLATIONS (i18n JSON)
+       All textual content is defined here.
+       ===================== */
+    const translations = {
+      fr: {
+        meta: { title: 'Portfolio — GNANKAMBARY Fadil Kristof', description: 'Portfolio bilingue de Fadil Gnankambary — SIG & géomarketing' },
+        brand: 'Fadil GNANKAMBARY',
+        nav: { home: 'Accueil', about: 'À propos', experience: 'Expérience', projects: 'Projets', contact: 'Contact' },
+        hero: { greeting: 'Bonjour, je suis Fadil Kristof Gnankambary', title: 'Spécialiste SIG & Géomarketing', location: 'Ouagadougou, Burkina Faso', ctaContact: 'Me contacter', ctaWork: 'Voir mes projets' },
+        about: { title: 'À propos', p1: 'Géomaticien et spécialiste en géomarketing avec plus de 7 ans d’expérience dans l’analyse spatiale, la collecte de données et le développement d’outils cartographiques.', p2: 'J’excelle dans la transformation des données géographiques en insights exploitables pour la planification réseau, le marketing et le développement de projets.' },
+        experience: { title: 'Expérience professionnelle' },
+        projects: { title: 'Projets récents' },
+        stack: { title: 'Compétences techniques' },
+        contact: { title: 'Contact', p1: 'Pour toute collaboration, intervention ou question, contactez-moi par email ou LinkedIn.', email: 'Envoyer un email', linkedin: 'LinkedIn' }
+      },
+      en: {
+        meta: { title: 'Portfolio — GNANKAMBARY Fadil Kristof', description: "Bilingual portfolio of Fadil Gnankambary — GIS & geomarketing specialist" },
+        brand: 'Fadil GNANKAMBARY',
+        nav: { home: 'Home', about: 'About', experience: 'Experience', projects: 'Projects', contact: 'Contact' },
+        hero: { greeting: "Hi, I'm Fadil Kristof Gnankambary", title: 'GIS & Geomarketing Specialist', location: 'Ouagadougou, Burkina Faso', ctaContact: 'Contact me', ctaWork: 'View work' },
+        about: { title: 'About', p1: 'Geomatics specialist with 7+ years in spatial analysis, data collection and development of interactive mapping tools.', p2: 'I turn geospatial data into actionable insights for network planning, marketing and project development.' },
+        experience: { title: 'Professional Experience' },
+        projects: { title: 'Recent Projects' },
+        stack: { title: 'Technical Stack' },
+        contact: { title: 'Contact', p1: 'For collaboration, training or inquiries, reach out via email or LinkedIn.', email: 'Send an email', linkedin: 'LinkedIn' }
+      }
+    };
+
+    /* =====================
+       DATA (dynamic sections)
+       Experiences, projects and stack items will be created dynamically
+       ===================== */
+    const DATA = {
+      experience: [
+        {
+          title_fr: 'Chargé du géomarketing et de la géomatique',
+          title_en: 'Geomarketing & geomatics senior officer',
+          company: 'Orange Burkina Faso',
+          period: 'Jan. 2021 – Présent',
+          bullets_fr: [
+            "Pilotage de collectes géoréférencées à grande échelle (jusqu'à 700 000 bâtiments) pour l’analyse du potentiel FTTx, FWA et GSM.",
+            "Conception d’outils de reporting (Power BI, R Shiny, Streamlit) et production de cartes interactives pour le suivi des KPIs."
+          ],
+          bullets_en: [
+            'Managed large-scale georeferenced data collection (up to 700,000 buildings) for FTTx, FWA and GSM potential analysis.',
+            'Designed reporting tools (Power BI, R Shiny, Streamlit) and interactive web maps for KPI tracking.'
+          ]
+        },
+        {
+          title_fr: 'Analyste Géomarketing',
+          title_en: 'Geomarketing Analyst',
+          company: 'SODIGAZ APC',
+          period: 'Nov. 2020 – Déc. 2020',
+          bullets_fr: [
+            'Mise en place d’une infrastructure spatiale et production de cartes intelligentes pour l’optimisation du réseau de distribution.',
+            'Supervision de la collecte terrain (KoboToolbox) et analyse des données.'
+          ],
+          bullets_en: [
+            'Implemented spatial database infrastructure and produced smart maps to optimize distribution network.',
+            'Supervised field data collection using KoboToolbox and analysed datasets.'
+          ]
+        },
+        {
+          title_fr: 'Technicien Supérieur en Géoinformation',
+          title_en: 'Senior GIS Technician',
+          company: 'Institut Géographique du Burkina (IGB)',
+          period: 'Déc. 2018 – Oct. 2020',
+          bullets_fr: [
+            'Production des BDOT 1992, 2002 et 2014 : classifications Landsat, vérifications terrain et cartographie des changements.',
+            'Contrôle qualité et participation à la validation nationale des cartes d’occupation du sol.'
+          ],
+          bullets_en: [
+            'Produced BDOT 1992, 2002 and 2014: Landsat classifications, field checks and change mapping.',
+            'Quality control and participation in national map validation.'
+          ]
+        },
+        {
+          title_fr: 'Étudiant stagiaire en Système d’Information Géographique',
+          title_en: 'Intern in Geographic Information Systems',
+          company: 'Institut de l’Environnement et de la Recherche Agricole (INERA)',
+          period: 'Nov. 2017 – Fév. 2018',
+          bullets_fr: [
+            'Développement d’une base de données SIG pour la gestion foncière de deux bas-fonds aménagés.',
+            'Cartographie des zones de risques et élaboration du mémoire de recherche du Master en Télédétection et SIG.'
+          ],
+          bullets_en: [
+            'Development of a GIS database for land management of two developed lowlands.',
+            'Mapping of risk areas and preparation of a research thesis for a Master\'s degree in Remote Sensing and GIS.'
+          ]
+        },
+        {
+          title_fr: 'Stagiaire database and mapping',
+          title_en: 'Database and mapping intern',
+          company: 'Geomatics Innovations',
+          period: 'Mai 2017 – Juil. 2017',
+          bullets_fr: [
+            'Conception de systèmes de bases de données et développement d’applications web en PHP.',
+            'Immersion dans un environnement anglophone et acquisition de compétences en communication technique internationale.'
+          ],
+          bullets_en: [
+            'Design of database systems and development of web applications in PHP.',
+            'Immersion in an English-speaking environment and acquisition of international technical communication skills.'
+          ]
+        },
+        {
+          title_fr: 'Stagiaire en géomatique',
+          title_en: 'Senior GIS Technician',
+          company: 'Geodetect Burkina',
+          period: 'Aout 2015 – Oct. 2015',
+          bullets_fr: [
+            'Création et administration de bases de données clients et géographiques.',
+            'Conception et mise en ligne du site web institutionnel et gestion des réseaux sociaux de l’entreprise.'
+          ],
+          bullets_en: [
+            'Creation and administration of customer and geographic databases.',
+            'Design and launch of the corporate website and management of the company\'s social media accounts.'
+          ]
+        },
+        {
+          title_fr: 'Stagiaire en géolocalisation',
+          title_en: 'Geolocation Intern',
+          company: 'Burval Corporate',
+          period: 'Fév. 2015 – Mars. 2015',
+          bullets_fr: [
+            'Suivi et analyse de données de traçage GPS.',
+            'Production de rapports de fonctionnement et maintenance des équipements installés.'
+          ],
+          bullets_en: [
+            'Monitoring and analysis of GPS tracking data.',
+            'Production of operational reports and maintenance of installed equipment.'
+          ]
+        },
+        {
+          title_fr: 'Stagiaire en Système d’Information',
+          title_en: 'Senior GIS Technician',
+          company: 'Gryphon Minerals Limited',
+          period: 'Sep. 2014 – Nov. 2014',
+          bullets_fr: [
+            'Réalisation de relevés GPS et cartographie de la zone d’impact de la mine.',
+            'Traitement d’images satellitaires et gestion de bases de données spatiales.'
+          ],
+          bullets_en: [
+            'Conducted GPS surveys and mapped the mine\'s impact area.',
+            'Processed satellite images and managed spatial databases.'
+          ]
+        }
+      ],
+
+      projects: [
+        {
+          title_fr: 'OpenJobsAfrica',
+          title_en: 'OpenJobsAfrica',
+          desc_fr: 'Tableau de bord R Shiny pour cartographier le marché de l’emploi en Afrique.',
+          desc_en: 'R Shiny dashboard mapping the African job market.',
+          img: 'https://www.volvic.co.uk/fileadmin/user_upload/gb/stages/999116_Volvic_Website24_Carousel_SparklingRange_FINAL.jpg',
+          link: 'https://krisfadil.shinyapps.io/emploi_afrique/',
+          tags: ['R', 'Shiny', 'Cartographie']
+        },
+		{
+          title_fr: 'Plugin QGIS GSM Cover Builder',
+          title_en: 'QGIS GSM Cover Builder plugin',
+          desc_fr: 'Plugin pyhton permettant aux professionnels du géomarketing de générer rapidement des plans de couverture GSM en fonction de localités et d\'un rayon de couverture prédéfinis',
+          desc_en: 'Python plugin enabling geomarketing professionals to quickly generate GSM coverage maps based on predefined locations and coverage radii.',
+          img: 'https://www.volvic.co.uk/fileadmin/user_upload/gb/stages/999116_Volvic_Website24_Carousel_SparklingRange_FINAL.jpg',
+          link: 'https://github.com/krisfadil/GSM-cover-builder',
+          tags: ['Python', 'PyQGIS', 'Qt Designer']
+        },
+		{
+          title_fr: 'Blog personnel de partage de connaissances',
+          title_en: 'Personal knowledge sharing blog',
+          desc_fr: 'Blog visant à partager des connaissances liées à la géomatique, tant techniques que thématiques',
+          desc_en: 'Blog aimed at sharing knowledge related to geomatics, both technical and thematic.',
+          img: 'https://www.volvic.co.uk/fileadmin/user_upload/gb/stages/999116_Volvic_Website24_Carousel_SparklingRange_FINAL.jpg',
+          link: 'https://passiongeomatique.blogspot.com/p/a-propos.html',
+          tags: ['Blogger', 'Sharing']
+        },
+		{
+          title_fr: 'Projet personnel de géolocalisation des agences bancaires de Ouaga',
+          title_en: 'Personal project to geolocate bank branches in Ouagadougou',
+          desc_fr: 'Projet réalisé sur ArcGIS Online avec un collègue dans le but de s’exercer sur la nouvelle plateforme d’ESRI (données collectées sur Google Earth)',
+          desc_en: 'Project carried out on ArcGIS Online with a colleague in order to practice using the new ESRI platform (data collected on Google Earth).',
+          img: 'https://www.volvic.co.uk/fileadmin/user_upload/gb/stages/999116_Volvic_Website24_Carousel_SparklingRange_FINAL.jpg',
+          link: 'https://passiongeomatique.blogspot.com/p/a-propos.html',
+          tags: ['ArcGIS Online', 'Webmap']
+        },
+        {
+          title_fr: 'Carte web de suivi du Covid-19',
+          title_en: 'Covid-19 tracking web map',
+          desc_fr: 'Projet personnel réalisé en 2019 sur la plateforme Umap dont l’objectif est de suivre le nombre de cas de Covid-19 par province au Burkina Faso',
+          desc_en: 'Personal project completed in 2019 on the Umap platform, with the aim of tracking the number of Covid-19 cases by province in Burkina Faso.',
+          img: 'https://www.volvic.co.uk/fileadmin/user_upload/gb/stages/999116_Volvic_Website24_Carousel_SparklingRange_FINAL.jpg',
+          link: 'https://www.arcgis.com/apps/mapviewer/index.html?webmap=7cfa58f5963d4aeba689bbd6e15310d3',
+          tags: ['Umap', 'Webmap']
+        },
+		{
+          title_fr: 'Carte web des points de vente SODIGAZ',
+          title_en: 'Web map of SODIGAZ points of sale',
+          desc_fr: 'Cartographie des dépôts et points de ventes de SODIGAZ-APC au Burkina Faso dans l’optique d’analyser le réseau de distribution (réalisée 2020 avec ArcGIS Online)',
+          desc_en: 'mapping of SODIGAZ-APC depots and points of sale in Burkina Faso with a view to analyzing the distribution network (produced in 2020 using ArcGIS Online)',
+          img: 'https://www.volvic.co.uk/fileadmin/user_upload/gb/stages/999116_Volvic_Website24_Carousel_SparklingRange_FINAL.jpg',
+          link: 'https://passiongeomatique.blogspot.com/p/a-propos.html',
+          tags: ['ArcGIS Online', 'Webmap']
+        }
+      ],
+
+      stack: [
+        { name: 'QGIS', icon: 'fa-solid fa-map' },
+        { name: 'ArcGIS', icon: 'fa-solid fa-globe' },
+        { name: 'Power BI', icon: 'fa-solid fa-chart-line' },
+        { name: 'Python', icon: 'fa-brands fa-python' },
+        { name: 'R', icon: 'fa-brands fa-r-project' },
+        { name: 'SQL', icon: 'fa-solid fa-database' }
+      ]
+    };
+
+    /* =====================
+       LANGUAGE / I18N SYSTEM
+       - detect/restore language preference
+       - initialize order: language -> dynamic content -> animations
+       ===================== */
+    let currentLang = 'fr';
+    function detectLang(){
+      const stored = localStorage.getItem('lang');
+      if(stored) return stored;
+      const nav = navigator.language || navigator.userLanguage || 'fr';
+      return nav.startsWith('en') ? 'en' : 'fr';
+    }
+
+    function applyTranslations(lang){
+      const t = translations[lang] || translations.fr;
+      // meta
+      document.title = t.meta.title;
+      document.querySelector('meta[name="description"]').setAttribute('content', t.meta.description);
+      // static data-i18n elements
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        const parts = key.split('.');
+        let val = t;
+        for(const p of parts){ val = val[p]; if(!val) break; }
+        if(val) el.textContent = val;
+      });
+    }
+
+    function createTimeline(lang){
+      const container = document.getElementById('timeline');
+      container.innerHTML = '';
+      DATA.experience.forEach((item, idx)=>{
+        const side = (idx%2===0)?'left':'right';
+        const el = document.createElement('div');
+        el.className = `timeline-item ${side} fade-up`;
+        const dot = document.createElement('div'); dot.className='timeline-dot'; el.appendChild(dot);
+        const card = document.createElement('div'); card.className='card';
+        const title = document.createElement('h3'); title.textContent = lang==='fr' ? item.title_fr : item.title_en; card.appendChild(title);
+        const meta = document.createElement('div'); meta.className='meta'; meta.textContent = `${item.company} • ${item.period}`; card.appendChild(meta);
+        const ul = document.createElement('ul');
+        const bullets = lang==='fr' ? item.bullets_fr : item.bullets_en;
+        bullets.forEach(b=>{ const li=document.createElement('li'); li.textContent=b; ul.appendChild(li); });
+        card.appendChild(ul);
+        el.appendChild(card);
+        container.appendChild(el);
+      });
+    }
+
+    function createProjects(lang){
+      const container = document.getElementById('projects-grid'); container.innerHTML='';
+      DATA.projects.forEach(p=>{
+        const card = document.createElement('article'); card.className='project-card fade-up';
+        const media = document.createElement('div'); media.className='project-media';
+        const img = document.createElement('img'); img.src = p.img; img.alt = lang==='fr' ? p.title_fr : p.title_en; media.appendChild(img);
+        card.appendChild(media);
+        const body = document.createElement('div'); body.className='project-body';
+        const h4 = document.createElement('h3'); h4.textContent = lang==='fr' ? p.title_fr : p.title_en; body.appendChild(h4);
+        const pdesc = document.createElement('p'); pdesc.style.color = 'var(--light-text)'; pdesc.textContent = lang==='fr' ? p.desc_fr : p.desc_en; body.appendChild(pdesc);
+        const tags = document.createElement('div'); tags.className='tags'; p.tags.forEach(tag=>{ const t=document.createElement('span'); t.className='tag'; t.textContent=tag; tags.appendChild(t); }); body.appendChild(tags);
+        const cta = document.createElement('a'); cta.className='project-cta'; cta.href=p.link; cta.target='_blank'; cta.rel='noopener'; cta.innerHTML = (lang==='fr' ? 'Voir le projet' : 'View project') + ' <i class="fa fa-arrow-right" style="margin-left:6px"></i>';
+        body.appendChild(cta);
+        card.appendChild(body);
+        container.appendChild(card);
+      });
+    }
+
+    function createStack(lang){
+      const container = document.getElementById('stack-grid'); container.innerHTML='';
+      DATA.stack.forEach(s=>{
+        const item = document.createElement('div'); item.className='stack-item fade-up';
+        const icon = document.createElement('div'); icon.innerHTML = `<i class="${s.icon}" style="font-size:22px;color:var(--primary-color)"></i>`;
+        const label = document.createElement('div'); label.style.marginTop='10px'; label.textContent = s.name;
+        item.appendChild(icon); item.appendChild(label);
+        container.appendChild(item);
+      });
+    }
+
+    /* Floating icons in hero */
+    const techIcons = [
+      {icon:'fa-brands fa-python', color:'#3070a9', size:40},
+      {icon:'fa-solid fa-map', color:'#16a34a', size:34},
+      {icon:'fa-brands fa-r-project', color:'#276749', size:38},
+      {icon:'fa-solid fa-database', color:'#6b21a8', size:30},
+      {icon:'fa-solid fa-chart-line', color:'#ea580c', size:36}
+    ];
+
+    function createFloatingIcons(){
+      const container = document.getElementById('floating-icons'); container.innerHTML='';
+      for(let i=0;i<8;i++){
+        const cfg = techIcons[Math.floor(Math.random()*techIcons.length)];
+        const el = document.createElement('div'); el.className='float-icon';
+        el.style.left = Math.random()*80 + '%';
+        el.style.top = Math.random()*80 + '%';
+        el.style.fontSize = (cfg.size + Math.random()*20) + 'px';
+        el.style.color = cfg.color; el.style.animationDuration = (6+Math.random()*8)+'s';
+        el.innerHTML = `<i class="${cfg.icon}"></i>`;
+        container.appendChild(el);
+      }
+    }
+
+    /* Intersection Observer for fade-up reveal */
+    function initObservers(){
+      const obs = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){ entry.target.classList.add('in-view'); entry.target.classList.add('in-view'); entry.target.classList.add('in-view'); entry.target.classList.add('in-view'); entry.target.classList.remove('fade-up'); }
+        });
+      },{threshold:0.12});
+      document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+    }
+
+    /* Typing effect for hero greeting */
+    function typeText(el, text, speed=50){
+      el.textContent=''; let i=0; const timer = setInterval(()=>{ el.textContent += text.charAt(i); i++; if(i>text.length-1) clearInterval(timer); }, speed);
+    }
+
+    /* Set UI language, create content, init animations */
+    function setLanguage(lang){
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      applyTranslations(lang);
+      createTimeline(lang);
+      createProjects(lang);
+      createStack(lang);
+      createFloatingIcons();
+      // typing
+      const greeting = translations[lang].hero.greeting;
+      typeText(document.getElementById('hero-greeting'), greeting, 40);
+      // set hero title and location
+      document.getElementById('hero-title').textContent = translations[lang].hero.title;
+      document.getElementById('hero-location').textContent = translations[lang].hero.location;
+      // set CTAs
+      document.getElementById('cta-contact').textContent = translations[lang].hero.ctaContact;
+      document.getElementById('cta-work').textContent = translations[lang].hero.ctaWork;
+
+      // apply active lang button styles
+      document.querySelectorAll('.lang-btn').forEach(btn=>btn.classList.remove('active'));
+      document.getElementById('btn-fr').classList.toggle('active', lang==='fr');
+      document.getElementById('btn-en').classList.toggle('active', lang==='en');
+
+      // update static about texts
+      document.getElementById('about-p1').textContent = translations[lang].about.p1;
+      document.getElementById('about-p2').textContent = translations[lang].about.p2;
+
+      // run observers after small timeout to allow DOM update
+      setTimeout(()=>initObservers(), 200);
+    }
+
+    // Hook buttons
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // language detection
+      const detected = detectLang();
+      document.getElementById('btn-fr').addEventListener('click', ()=>setLanguage('fr'));
+      document.getElementById('btn-en').addEventListener('click', ()=>setLanguage('en'));
+      // set initial language
+      setLanguage(detected);
+      // year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>
